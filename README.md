@@ -12,11 +12,7 @@ This project is a Python-based application designed to help kids trace pictures 
 - **sample_prompts.md**: File containing sample prompts for generating image outlines.
 
 ## Demo
-
-<video width="600" controls>
-  <source src="./demo/demo.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+![Demo Video](./demo/demo.mp4)
 
 ## Setup
 
