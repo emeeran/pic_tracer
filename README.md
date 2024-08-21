@@ -19,14 +19,14 @@ This project is a Python-based application designed to help kids trace pictures 
 
 1. **Clone the repository**:
     ```sh
-    git clone <repository-url>
-    cd <repository-directory>
+    git clone https://github.com/emeeran/pic_tracer
+    cd pic_tracer
     ```
 
 2. **Create a virtual environment**:
     ```sh
-    python -m venv venv
-    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+    python -m .venv .venv
+    source .venv/bin/activate  # On Windows use `.venv\Scripts\activate`
     ```
 
 3. **Install dependencies**:
@@ -57,4 +57,3 @@ python cli_app.py
 
 ## License
 This project is licensed under the MIT License.
-
