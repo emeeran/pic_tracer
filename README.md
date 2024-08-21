@@ -12,7 +12,8 @@ This project is a Python-based application designed to help kids trace pictures 
 - **sample_prompts.md**: File containing sample prompts for generating image outlines.
 
 ## Demo
-![Demo Video](https://github.com/user-attachments/assets/7890a4d7-73fe-4cd4-b5e0-f52a14913513)
+<!-- ![Demo Video](https://github.com/user-attachments/assets/7890a4d7-73fe-4cd4-b5e0-f52a14913513) -->
+[Watch Demo Video](https://github.com/user-attachments/assets/7890a4d7-73fe-4cd4-b5e0-f52a14913513)
 
 ## Setup
 
