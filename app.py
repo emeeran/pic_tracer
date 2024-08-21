@@ -18,86 +18,30 @@ html_template = """
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Generator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-        }
-        .container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 20px;
-        }
-        .image-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .image-container img {
-            max-width: 100%;
-            height: auto;
-        }
-        .download-link {
-            margin-top: 10px;
-        }
-        .input-container {
-            display: flex;
-            align-items: center;
-        }
-        .input-container {
-            position: relative;
-            width: 160%; /* Adjust the width as needed */
-        }
-        
-        .input-container input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            box-sizing: border-box; /* Ensure padding is included in the width */
-        }
-        
-        .input-container .generate-button {
-            position: absolute;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            padding: 0 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border: none;
-            background-color: #007BFF; /* Adjust the background color as needed */
-            color: white;
-        }
-        
-        .input-container button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-left: 10px;
-        }
-        
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="container">
-        <div class="image-container">
-            {% if image_url %}
-                <img src="{{ image_url }}" alt="Generated Image" style="max-width: 100%; height: auto;">
-                <a href="{{ image_url }}" download class="download-link">Download Image</a>
-            {% endif %}
-        </div>
-        <div class="input-container">
-            <form action="/generate" method="post">
-                <input type="text" name="prompt" placeholder="Enter the prompt" required>
-                <button type="submit">Generate Image</button>
-            </form>
+<body class="bg-gray-900 text-white flex items-center justify-center min-h-screen">
+    <div class="container mx-auto p-6 bg-gray-800 shadow-md rounded-lg w-full max-w-4xl">
+        <div class="flex justify-between items-start">
+            <!-- Input Section -->
+            <div class="w-full">
+                <form action="/generate" method="post" class="flex flex-col">
+                    <textarea name="prompt" placeholder="Enter the prompt" required 
+                        class="w-full p-3 rounded-lg border border-gray-600 bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 h-32 mb-4"></textarea>
+                    <button type="submit" 
+                        class="bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-lg w-full">
+                        Generate Image
+                    </button>
+                </form>
+            </div>
+
+            <!-- Image Section -->
+            <div class="ml-6 flex flex-col items-center">
+                {% if image_url %}
+                    <img src="{{ image_url }}" alt="Generated Image" class="max-w-sm h-auto rounded-lg mb-4">
+                    <a href="{{ image_url }}" download class="text-blue-400 hover:text-blue-600">Download Image</a>
+                {% endif %}
+            </div>
         </div>
     </div>
 </body>
