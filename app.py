@@ -11,7 +11,7 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 app = Flask(__name__)
 
 # HTML template for the chat-like UI
-html_template = '''
+html_template = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -102,34 +102,35 @@ html_template = '''
     </div>
 </body>
 </html>
-'''
+"""
 
-@app.route('/')
+
+@app.route("/")
 def index():
     return render_template_string(html_template, image_url=None)
 
-@app.route('/generate', methods=['POST'])
+
+@app.route("/generate", methods=["POST"])
 def generate_image():
-    prompt = request.form['prompt']
+    prompt = request.form["prompt"]
 
     # Correct the input dictionary format
     input_data = {
         "prompt": prompt,
-        # "width": 2480,
-        # "height": 3508
+        "num_outputs": 1,
+        "aspect_ratio": "1:1",
+        "output_format": "webp",
+        "output_quality": 80,
     }
 
-    output = replicate.run(
-        # "black-forest-labs/flux-dev:b2ccvnbztsrm20ch1rc981t7qc",
-        # "yorickvp/llava-13b:a0fdc44e4f2e1f20f2bb4e27846899953ac8e66c5886c5878fa1d6b73ce009e5",
-        "stability-ai/sdxl:39ed52f2a78e934b3ba6e2a89f5b1c712de7dfea535525255b1aa35c5565e08b",
-        input=input_data
-    )
+    output = replicate.run("black-forest-labs/flux-schnell", input=input_data)
+    print(output)
 
     # Assuming the output is a list with a single URL
     image_url = output[0]
 
     return render_template_string(html_template, image_url=image_url)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     app.run(debug=True)
