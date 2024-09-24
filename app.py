@@ -26,9 +26,9 @@ html_template = """
             <!-- Input Section -->
             <div class="w-full">
                 <form action="/generate" method="post" class="flex flex-col">
-                    <textarea name="prompt" placeholder="Enter the prompt" required 
+                    <textarea name="prompt" placeholder="Enter the prompt" required
                         class="w-full p-3 rounded-lg border border-gray-600 bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 h-32 mb-4"></textarea>
-                    <button type="submit" 
+                    <button type="submit"
                         class="bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-lg w-full">
                         Generate Image
                     </button>
@@ -56,13 +56,23 @@ def index():
 
 @app.route("/generate", methods=["POST"])
 def generate_image():
-    prompt = request.form["prompt"]
+    # Fetch the user input
+    user_prompt = request.form["prompt"]
+
+    # Define the prefix
+    prefix = "No colors, just black outlines on a white background. "
+
+    # Modify the prompt to remove any mention of colors
+    prompt = user_prompt.replace("vibrant colors", "").replace("colors", "").strip()
+
+    # Ensure the prefix is added to the processed prompt
+    final_prompt = prefix + prompt
 
     # Correct the input dictionary format
     input_data = {
-        "prompt": prompt,
+        "prompt": final_prompt,
         "num_outputs": 1,
-        "aspect_ratio": "1:1",
+        "aspect_ratio": "4:3",
         "output_format": "webp",
         "output_quality": 80,
     }
@@ -74,6 +84,7 @@ def generate_image():
     image_url = output[0]
 
     return render_template_string(html_template, image_url=image_url)
+
 
 
 if __name__ == "__main__":
